@@ -4,6 +4,8 @@ import numpy as np
 from network import MLP
 
 if __name__ == "__main__":
+    # some test code...
+
     # layer = Layer(5, 3, activate="tanh")
     mlp = MLP(5, [3, 3])
     xs = [1, 2, 3, 4, 5]

@@ -53,7 +53,7 @@ class Value():
                 build_graph(v)
         build_graph(self)
 
-        h = graphviz.Digraph('hello', format='png',
+        h = graphviz.Digraph('value_graph', format='png',
                              graph_attr={'rankdir': "TB"})
         for v in nodes:
             label = ""
@@ -68,7 +68,7 @@ class Value():
             v0 = e[0]
             v1 = e[1]
             h.edge(str(id(v0)), str(id(v1)))
-        h.render('hello')
+        h.render('value_graph')
 
     def log(self):
         data = math.log(self.__data)
