@@ -116,7 +116,7 @@ class MLP(Module):
         return x
 
     def parameters(self):
-        return [param for layer in self.__layers for parm in layer.parameters()]
+        return [param for layer in self.__layers for param in layer.parameters()]
 
     def zero_grad(self):
         for layer in self.__layers:

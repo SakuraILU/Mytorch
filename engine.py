@@ -112,7 +112,7 @@ class Value():
         out.__op = "relu"
 
         def backward():
-            self.grad = out.grad * self.__data if self.__data > 0 else 0
+            self.grad += out.grad * self.__data if self.__data > 0 else 0
 
         out.__backward = backward
 
@@ -143,8 +143,8 @@ class Value():
         out.__op = "-"
 
         def backward():
-            self.grad -= out.grad
-            other.grad -= out.grad
+            self.grad += out.grad
+            other.grad += -out.grad
 
         out.__backward = backward
 
@@ -230,6 +230,16 @@ class Value():
             other, Value) else Value(other, label="num")
 
         return other / self
+
+    def __iadd__(self, other):
+        other = other.__data if isinstance(other, Value) else other
+        self.__data += other
+        return self
+
+    def __isub__(self, other):
+        other = other.__data if isinstance(other, Value) else other
+        self.__data -= other
+        return self
 
     def __str__(self):
         return f"Value(data = {self.__data:.4f}\t op = {self.__op}\t lable = {self.label} \t grad = {self.grad:.4f})"
